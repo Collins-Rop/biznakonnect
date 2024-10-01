@@ -3,7 +3,7 @@ package com.bizna.biznakonnect.service;
 import com.bizna.biznakonnect.model.User;
 import com.bizna.biznakonnect.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,19 +12,25 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User registerUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public void registerUser(String username, String email, String password) {
+        if (existsByUsername(username)) {
+            throw new IllegalArgumentException("Username already exists");
+        }
+        if (existsByEmail(username)) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        userRepository.save(user);
     }
 
     @Override
@@ -54,11 +60,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean existsByUsername(String username) {
-        return userRepository.existsByUsername(username);
+        return userRepository.findByUsername(username).isPresent();
     }
 
     @Override
     public boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
+        // Assuming you add an email field to the User model
+        return userRepository.findByEmail(email).isPresent();
     }
 }

@@ -1,12 +1,16 @@
 package com.bizna.biznakonnect.service;
 
 import com.bizna.biznakonnect.model.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface UserService {
-    User registerUser(User user);
+
+
+    void registerUser(String username, String email, String password);
 
     Optional<User> getUserById(Long id);
 
@@ -21,4 +25,5 @@ public interface UserService {
     boolean existsByUsername(String username);
 
     boolean existsByEmail(String email);
+
 }
