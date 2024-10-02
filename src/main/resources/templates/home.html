@@ -4,13 +4,70 @@
     <title>BiznaKonnect - Home</title>
     <style>
         body {
-            background-color: #d4edda;
+            background-color: #f8f9fa;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            margin-left: 10px;
+            width: 100%;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar ul li i {
+            font-size: 20px;
+            color: #ccc;
+        }
+
+        .main-content {
+            margin-left: 270px; /* Adjust margin to account for fixed sidebar */
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #fff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
         }
 
         .container {
@@ -20,6 +77,8 @@
             border-radius: 8px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            width: 100%;
         }
 
         h1 {
@@ -34,40 +93,140 @@
             margin-bottom: 20px;
         }
 
-        a, button {
-            text-decoration: none;
-            color: #28a745;
-            font-size: 18px;
-            margin: 0 10px;
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
             padding: 10px 15px;
             border: 1px solid #28a745;
             border-radius: 4px;
-            transition: background-color 0.3s ease;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
             cursor: pointer;
-            background: none;
+            margin-left: 10px;
         }
 
-        a:hover, button:hover {
+        .search-bar button:hover {
+            background-color: #218838;
+        }
+
+        .business-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .business-card {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .business-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .business-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .business-card p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .business-card .rating {
+            color: #f39c12;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .business-card .location {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .business-card a {
+            text-decoration: none;
+            color: #28a745;
+            font-size: 14px;
+            border: 1px solid #28a745;
+            border-radius: 4px;
+            padding: 5px 10px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .business-card a:hover {
             background-color: #28a745;
             color: white;
         }
     </style>
-    <script>
-        function redirectToLogin() {
-            window.location.href = 'login.html';
-        }
-
-        function redirectToRegister() {
-            window.location.href = 'register.html';
-        }
-    </script>
 </head>
 <body>
-<div class="container">
-    <h1>Welcome to BiznaKonnect</h1>
-    <p>Connect with local businesses and find the services you need!</p>
-    <button onclick="redirectToLogin()">Login</button>
-    <button onclick="redirectToRegister()">Register</button>
+<div class="sidebar">
+    <h2>BiznaKonnect</h2>
+    <ul>
+        <li><i class="fa fa-home"></i><a href="/home">Home</a></li>
+        <li><i class="fa fa-user"></i><a href="/profile">Profile</a></li>
+        <li><i class="fa fa-briefcase"></i><a href="/businesses">Businesses</a></li>
+        <li><i class="fa fa-cog"></i><a href="/settings">Settings</a></li>
+        <li><i class="fa fa-sign-out"></i><a href="/logout">Logout</a></li>
+    </ul>
 </div>
+
+<div class="main-content">
+    <div class="header">
+        <h1>BiznaKonnect</h1>
+    </div>
+    <div class="container">
+        <h1>Welcome to BiznaKonnect</h1>
+        <p>Connect with local businesses and find the services you need!</p>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for businesses...">
+            <button>Search</button>
+        </div>
+        <div class="business-list">
+            <div class="business-card">
+                <h3>Shave It Kinyozi</h3>
+                <p>Kinyozi</p>
+                <p class="rating">⭐⭐⭐⭐⭐</p>
+                <p class="location">Nairobi, Kenya</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Nail Parlor</h3>
+                <p>Hair styling</p>
+                <p class="rating">⭐⭐⭐⭐</p>
+                <p class="location">Thika, Kenya</p>
+                <a href="#">View Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

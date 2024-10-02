@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface UserService {
 
 
-    void registerUser(String username, String email, String password);
+    void registerUser(String username, String firstName, String lastName, String email, String password);
 
     Optional<User> getUserById(Long id);
 

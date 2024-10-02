@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void registerUser(String username, String email, String password) {
+    public void registerUser(String username, String firstName, String lastName, String email, String password) {
         if (existsByUsername(username)) {
             throw new IllegalArgumentException("Username already exists");
         }
@@ -65,7 +65,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean existsByEmail(String email) {
-        // Assuming you add an email field to the User model
         return userRepository.findByEmail(email).isPresent();
     }
 }
