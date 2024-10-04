@@ -12,18 +12,16 @@
 
         .sidebar {
             width: 250px;
-            background-color: #343a40;
+            background-color: #90EE90;
             color: white;
             height: 100vh;
             padding: 20px;
             box-sizing: border-box;
-            position: fixed;
         }
 
         .sidebar h2 {
             color: #fff;
             text-align: center;
-            margin-bottom: 30px;
         }
 
         .sidebar ul {
@@ -32,31 +30,20 @@
         }
 
         .sidebar ul li {
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
+            margin: 15px 0;
         }
 
         .sidebar ul li a {
             color: #fff;
             text-decoration: none;
             font-size: 16px;
-            display: inline-block;
-            margin-left: 10px;
-            width: 100%;
         }
 
         .sidebar ul li a:hover {
             text-decoration: underline;
         }
 
-        .sidebar ul li i {
-            font-size: 20px;
-            color: #ccc;
-        }
-
         .main-content {
-            margin-left: 270px; /* Adjust margin to account for fixed sidebar */
             flex-grow: 1;
             padding: 20px;
             box-sizing: border-box;
@@ -135,13 +122,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 10px;
             padding: 20px;
-            width: 250px;
+            width: 200px;
             text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .business-card:hover {
-            transform: translateY(-5px);
         }
 
         .business-card h3 {
@@ -154,18 +136,6 @@
             font-size: 14px;
             color: #555;
             margin-bottom: 10px;
-        }
-
-        .business-card .rating {
-            color: #f39c12;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .business-card .location {
-            color: #888;
-            font-size: 12px;
-            margin-bottom: 15px;
         }
 
         .business-card a {
@@ -189,14 +159,13 @@
 <div class="sidebar">
     <h2>BiznaKonnect</h2>
     <ul>
-        <li><i class="fa fa-home"></i><a href="/home">Home</a></li>
-        <li><i class="fa fa-user"></i><a href="/profile">Profile</a></li>
-        <li><i class="fa fa-briefcase"></i><a href="/businesses">Businesses</a></li>
-        <li><i class="fa fa-cog"></i><a href="/settings">Settings</a></li>
-        <li><i class="fa fa-sign-out"></i><a href="/logout">Logout</a></li>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/businesses">Businesses</a></li>
+        <li><a href="/settings">Settings</a></li>
+        <li><a href="/logout">Logout</a></li>
     </ul>
 </div>
-
 <div class="main-content">
     <div class="header">
         <h1>BiznaKonnect</h1>
@@ -205,28 +174,109 @@
         <h1>Welcome to BiznaKonnect</h1>
         <p>Connect with local businesses and find the services you need!</p>
         <div class="search-bar">
-            <input type="text" placeholder="Search for businesses...">
+            <input type="text" id="searchInput" placeholder="Search for businesses..." onkeyup="filterBusinesses()">
             <button>Search</button>
+        </div>
+        <div class="business-list" id="businessList">
+            <div th:each="business : ${businesses}" class="business-card">
+                <h3 th:text="${business.name}">Business Name</h3>
+                <p th:text="${business.description}">Business Description</p>
+                <a th:href="@{/businesses/{id}(id=${business.id})}">View Details</a>
+            </div>
         </div>
         <div class="business-list">
             <div class="business-card">
                 <h3>Shave It Kinyozi</h3>
                 <p>Kinyozi</p>
-                <p class="rating">⭐⭐⭐⭐⭐</p>
-                <p class="location">Nairobi, Kenya</p>
                 <a href="#">View Details</a>
             </div>
             <div class="business-card">
                 <h3>Nail Parlor</h3>
                 <p>Hair styling</p>
-                <p class="rating">⭐⭐⭐⭐</p>
-                <p class="location">Thika, Kenya</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Cafe Java</h3>
+                <p>Coffee Shop</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Tech World Solutions</h3>
+                <p>Electronics Store</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Healthy Eats Deli</h3>
+                <p>Restaurant</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Creative Minds Academy</h3>
+                <p>Learning Center</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Elite Gym & Fitness</h3>
+                <p>Gym</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Green Thumb Nursery</h3>
+                <p>Gardening Store</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>The Handy Fix</h3>
+                <p>Handyman Services</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Fashionista Boutique</h3>
+                <p>Clothing Store</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Paw Paradise</h3>
+                <p>Pet Grooming</p>
+                <a href="#">View Details</a>
+            </div>
+            <div class="business-card">
+                <h3>Bright Smiles Dental Clinic</h3>
+                <p>Dental Clinic</p>
                 <a href="#">View Details</a>
             </div>
         </div>
     </div>
 </div>
+<script>
+    const businesses = /*[[${businesses}]]*/ [];
 
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    function filterBusinesses() {
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+        const filteredBusinesses = businesses.filter(business =>
+            business.name.toLowerCase().includes(searchInput) ||
+            business.description.toLowerCase().includes(searchInput)
+        );
+        displayBusinesses(filteredBusinesses);
+    }
+
+    function displayBusinesses(businesses) {
+        const businessList = document.getElementById('businessList');
+        businessList.innerHTML = '';
+        businesses.forEach(business => {
+            const businessCard = document.createElement('div');
+            businessCard.className = 'business-card';
+            businessCard.innerHTML = `
+                <h3>${business.name}</h3>
+                <p>${business.description}</p>
+                <a href="/businesses/${business.id}">View Details</a>
+            `;
+            businessList.appendChild(businessCard);
+        });
+    }
+
+    // Initial display of all businesses
+    displayBusinesses(businesses);
+</script>
 </body>
 </html>
