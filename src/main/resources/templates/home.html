@@ -251,28 +251,28 @@
 <script>
     const businesses = /*[[${businesses}]]*/ [];
 
-    function filterBusinesses() {
-        const searchInput = document.getElementById('searchInput').value.toLowerCase();
-        const filteredBusinesses = businesses.filter(business =>
-            business.name.toLowerCase().includes(searchInput) ||
-            business.description.toLowerCase().includes(searchInput)
-        );
-        displayBusinesses(filteredBusinesses);
-    }
+        function filterBusinesses() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const filteredBusinesses = businesses.filter(business =>
+                business.name.toLowerCase().includes(searchInput) ||
+                business.description.toLowerCase().includes(searchInput)
+            );
+            displayBusinesses(filteredBusinesses);
+        }
 
-    function displayBusinesses(businesses) {
-        const businessList = document.getElementById('businessList');
-        businessList.innerHTML = '';
-        businesses.forEach(business => {
-            const businessCard = document.createElement('div');
-            businessCard.className = 'business-card';
-            businessCard.innerHTML = `
-                <h3>${business.name}</h3>
-                <p>${business.description}</p>
-                <a href="/businesses/${business.id}">View Details</a>
-            `;
-            businessList.appendChild(businessCard);
-        });
+        function displayBusinesses(businesses) {
+            const businessList = document.getElementById('businessList');
+            businessList.innerHTML = '';
+            businesses.forEach(business => {
+                const businessCard = document.createElement('div');
+                businessCard.className = 'business-card';
+                businessCard.innerHTML = `
+                    <h3>${business.name}</h3>
+                    <p>${business.description}</p>
+                    <a href="/businesses/${business.id}">View Details</a>
+                `;
+                businessList.appendChild(businessCard);
+            });
     }
 
     // Initial display of all businesses
