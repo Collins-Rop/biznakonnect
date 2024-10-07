@@ -84,7 +84,6 @@ com.bizna.biznakonnect
 - `/api/users`: User-related operations
 - `/api/businesses`: Business-related operations
 
-For detailed API documentation, please refer to the API Documentation file (to be created).
 
 ## Contributing
 
@@ -102,6 +101,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-Collins Rop - colinrop68@gmail.com
+Collins Rop - kimutai1136@gmail.com
 
 Project Link: https://github.com/Collins-Rop/biznakonnect
